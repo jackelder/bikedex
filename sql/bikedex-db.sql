@@ -32,12 +32,18 @@ CREATE TABLE Model (
 	"name" VARCHAR(50),
 	"version" VARCHAR(50),
 	msrp DECIMAL(8,2),
-	imageUrl VARCHAR(1000),
 	manufacturerUrl VARCHAR(1000),
 	brandId int REFERENCES Brand(id),
-	colorId int REFERENCES Color(id),
 	typeId int REFERENCES "Type"(id),
 	subtypeId int REFERENCES Subtype(id)
+);
+
+DROP TABLE IF EXISTS Bike CASCADE;
+CREATE TABLE Bike (
+	"id" serial PRIMARY KEY,
+	imageUrl VARCHAR(1000),
+	modelId int REFERENCES Model(id),
+	colorId int REFERENCES Color(id)
 );
 
 INSERT INTO Brand("name", yearEst, country, websiteUrl) VALUES
@@ -59,7 +65,8 @@ INSERT INTO Color("name", "hex") VALUES
 ('Green', '#008000'),
 ('Purple', '#800080'),
 ('Orange', '#FFA500'),
-('Silver', '#C0C0C0');
+('Silver', '#C0C0C0'),
+('Turqouise', '#009998');
 
 INSERT INTO "Type" ("name") VALUES
 ('Road'),
@@ -85,10 +92,14 @@ INSERT INTO Subtype ("name") VALUES
 ('Fitness'),
 ('Cruiser');
 
-INSERT INTO Model ("name", "version", msrp, imageUrl, manufacturerUrl, brandId, colorId, typeId, subtypeId) VALUES
-('Cross', '1.3', 1299.99, 'https://cdn.shopify.com/s/files/1/1109/6048/products/media_32d5c456-d7ac-43a8-b612-72eb88605b46_1024x1024.jpg?v=1589020416',
-'https://www.fujibikes.com/usa/bikes/road/cyclocross/cross', 3, 4, 1, 4),
-('Chisel', 'Standard', 1375.00, 'https://s7d5.scene7.com/is/image/Specialized/?layer=0&wid=1920&hei=640&fmt=jpg&src=is{Specialized/pdp-product-bg-dark?wid=1920&hei=640}&layer=1&src=is{Specialized/91720-70_CHISEL-29-BLK-SUMBLU-HYP_HERO?wid=920&hei=600&$hybris-pdp-hero$}',
-'https://www.specialized.com/us/en/chisel/p/171237?color=264078-171237&searchText=91720-7001', 2, 4, 2, 7),
-('Treadwell Neo', 'Standard', 2300.00, 'https://embed.widencdn.net/img/dorelrl/flycfmnisj/2000px@1x/C20_C63150M_Treadwell_Neo_MAT_PD.png',
-'https://www.cannondale.com/en-us/bikes/electric/e-fitness/treadwell-neo/treadwell-neo?sku=c63150m10sm', 1, 7, 3, 14);
+INSERT INTO Model ("name", "version", msrp, brandId, typeId, subtypeId, manufacturerUrl) VALUES
+('Cross', '1.3', 1299.99, 3, 1, 4, 'https://www.fujibikes.com/usa/bikes/road/cyclocross/cross/cross-1-3'),
+('Chisel', 'Standard', 1375.00, 2, 2, 7, 'https://www.specialized.com/us/en/chisel/p/171237?color=264078-171237&searchText=91720-7001'),
+('Treadwell Neo', 'Standard', 2300.00, 1, 3, 14, 'https://www.cannondale.com/en-us/bikes/electric/e-fitness/treadwell-neo/treadwell-neo?sku=c63150m10sm');
+
+INSERT INTO Bike (modelId, colorId, imageUrl) VALUES
+(1, 4, 'https://cdn.shopify.com/s/files/1/1109/6048/products/media_32d5c456-d7ac-43a8-b612-72eb88605b46_1024x1024.jpg?v=1589020416'),
+(2, 4, 'https://s7d5.scene7.com/is/image/Specialized/?layer=0&wid=1920&hei=640&fmt=jpg&src=is{Specialized/pdp-product-bg-dark?wid=1920&hei=640}&layer=1&src=is{Specialized/91720-70_CHISEL-29-BLK-SUMBLU-HYP_HERO?wid=920&hei=600&$hybris-pdp-hero$}'),
+(2, 11, 'https://s7d5.scene7.com/is/image/Specialized/?layer=0&wid=1920&hei=640&fmt=jpg&src=is{Specialized/pdp-product-bg-dark?wid=1920&hei=640}&layer=1&src=is{Specialized/91720-72_CHISEL-29-DSTTUR-DOVGRY_HERO?wid=920&hei=600&$hybris-pdp-hero$}'),
+(3, 7, 'https://embed.widencdn.net/img/dorelrl/flycfmnisj/2000px@1x/C20_C63150M_Treadwell_Neo_MAT_PD.png');
+
