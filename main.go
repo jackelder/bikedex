@@ -24,7 +24,4 @@ func main() {
 		fmt.Println("connected!")
 	}
 
-	b, err := data.ReadBrand(3, db)
-
-	fmt.Println(b.ToJsonString())
 }
