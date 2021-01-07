@@ -3,7 +3,7 @@ package data
 import (
 	"database/sql"
 
-	"github.com/jackelder18/bikedex/domain"
+	"github.com/jackelder/bikedex/domain"
 )
 
 func ReadColor(id int, db *sql.DB) (*domain.Color, error) {

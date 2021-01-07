@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/jackelder18/bikedex/data"
+	"github.com/jackelder/bikedex/data"
 )
 
 func main() {
