@@ -39,4 +39,9 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: jackelder/sunset-reminder
+          ref: action
           token: ${{ secrets.ORG_TOKEN }}
+          path: .github/actions
+          
+      - name: Run private repo action 
+        uses: ./.github/actions/sunset-reminder
