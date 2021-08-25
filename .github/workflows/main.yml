@@ -41,7 +41,7 @@ jobs:
           repository: jackelder/sunset-reminder
           ref: action
           token: ${{ secrets.ORG_TOKEN }}
-          path: .github/actions
+          path: .github/actions/sunset-reminder
 
       - run: ls -al .github/actions
           
