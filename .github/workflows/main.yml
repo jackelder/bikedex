@@ -34,3 +34,8 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      
+      - name: Checkout Private repo
+        uses: actions/checkout@v2
+        with:
+          repository: jackelder/sunset-reminder
