@@ -42,6 +42,8 @@ jobs:
           ref: action
           token: ${{ secrets.ORG_TOKEN }}
           path: .github/actions
+
+      - run: ls -al .github/actions
           
       - name: Run private repo action 
         uses: ./.github/actions/sunset-reminder
